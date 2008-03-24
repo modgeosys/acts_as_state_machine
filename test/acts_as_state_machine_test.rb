@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/test_helper'
+require 'person'
 
 include ScottBarron::Acts::StateMachine
 
@@ -7,7 +8,7 @@ class ActsAsStateMachineTest < Test::Unit::TestCase
   
   def test_no_initial_value_raises_exception
     assert_raise(NoInitialState) {
-      Person.acts_as_state_machine({})
+      ::Person.acts_as_state_machine({})
     }
   end
   
@@ -88,7 +89,7 @@ class ActsAsStateMachineTest < Test::Unit::TestCase
     c.junk!
 
     # This is the invalid event
-    c.new_message!
+    assert_raise(InvalidState) {c.new_message!}
     assert_equal :junk, c.current_state
   end
 
@@ -132,7 +133,7 @@ class ActsAsStateMachineTest < Test::Unit::TestCase
 
     c.close!
     c.closed_after = false
-    c.close!
+    assert_raise(InvalidState) {c.close!}
 
     assert !c.closed_after
   end
@@ -191,15 +192,15 @@ class ActsAsStateMachineTest < Test::Unit::TestCase
   end
   
   def test_count_in_state
-    cnt0 = Conversation.count(['state_machine = ?', 'read'])
+    cnt0 = Conversation.count(:conditions => ['state_machine = ?', 'read'])
     cnt  = Conversation.count_in_state(:read)
     
     assert_equal cnt0, cnt
   end
   
   def test_count_in_state_with_conditions
-    cnt0 = Conversation.count(['state_machine = ? AND subject = ?', 'read', 'Foo'])
-    cnt  = Conversation.count_in_state(:read, ['subject = ?', 'Foo'])
+    cnt0 = Conversation.count(:conditions => ['state_machine = ? AND subject = ?', 'read', 'Foo'])
+    cnt  = Conversation.count_in_state(:read, :conditions => ['subject = ?', 'Foo'])
     
     assert_equal cnt0, cnt
   end

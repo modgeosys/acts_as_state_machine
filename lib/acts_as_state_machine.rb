@@ -90,9 +90,14 @@ module ScottBarron                   #:nodoc:
           end
           
           def fire(record)
-            next_states(record).each do |transition|
-              break true if transition.perform(record)
+            trans = next_states(record)
+            raise InvalidState if trans.empty?
+            
+            trans.each do |transition|
+              return true if transition.perform(record)
             end
+            
+            false
           end
           
           def transitions(trans_opts)

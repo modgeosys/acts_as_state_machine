@@ -6,8 +6,8 @@ sqlite3:
   :dbfile: state_machine.sqlite3.db
 postgresql:
   :adapter: postgresql
-  :username: postgres
-  :password: postgres
+  :username: pjones
+  :password: 
   :database: state_machine_test
   :min_messages: ERROR
 mysql:
