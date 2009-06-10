@@ -1,6 +1,21 @@
+require 'rubygems'
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "acts_as_state_machine"
+    gem.summary = "Gemification of acts_as_state_machine plugin"
+    gem.email = "kweller@asapwebsoft.com"
+    gem.homepage = "http://github.com/asapnet/acts_as_state_machine"
+    gem.authors = ["Scott Barron", "Kevin Weller"]
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+  end
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+end
 
 desc 'Default: run unit tests.'
 task :default => [:clean_db, :test]
