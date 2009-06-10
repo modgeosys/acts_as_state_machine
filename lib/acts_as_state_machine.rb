@@ -271,3 +271,7 @@ module ScottBarron                   #:nodoc:
     end
   end
 end
+
+ActiveRecord::Base.class_eval do
+  include ScottBarron::Acts::StateMachine
+end
