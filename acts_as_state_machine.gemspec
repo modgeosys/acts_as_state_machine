@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
      "pkg/acts_as_state_machine-1.0.0.gem",
      "test/database.yml",
      "test/fixtures/conversation.rb",
-     "test/fixtures/conversations.rb",
-     "test/fixtures/person",
+     "test/fixtures/conversations.yml",
+     "test/fixtures/person.rb",
      "test/schema.rb",
      "test/test_helper.rb"
   ]
@@ -35,7 +35,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.3}
   s.summary = %q{Gemification of acts_as_state_machine plugin}
   s.test_files = [
-    "test/renderer_test.rb"
+    "test/fixtures/conversation.rb",
+    "test/fixtures/person.rb"
   ]
 
   if s.respond_to? :specification_version then
